@@ -152,7 +152,7 @@ export default function Stores() {
               href="mailto:support@jewelshop.com"
               className="inline-block bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition"
             >
-              Email Support
+              Email Us
             </a>
           </div>
         </div>
