@@ -1,0 +1,36 @@
+Jewellery Shop website using MERN Stack
+
+Architecture
+ MERN Stack
+   Frontend
+   Backend
+
+Frontend:
+  React
+  Tailwind CSS
+  Axios Library
+  React Router
+
+UI Library:
+   Tailwind CSS
+   Framer Motion
+   React Slick
+  
+Backend:
+   Node.js
+   ExpressJS
+   Mongoose
+   dotenv
+   JWT
+   bcryptjs
+   cors
+   
+Database:
+ MongoDB
+
+Free Jewelry Images:
+Unsplash
+Pexels
+   
+   
+   

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply antialiased;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-white text-gray-900;
+}
+
