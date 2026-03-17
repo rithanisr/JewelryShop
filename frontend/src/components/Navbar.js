@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import logo from "../Asset/logo.png";
 
 export default function Navbar() {
   const { user, logout, cartCount } = useContext(AuthContext);
@@ -15,9 +16,25 @@ export default function Navbar() {
     <nav className="bg-gray-900 text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-2xl font-bold text-yellow-500">
-            ✨ JewelShop
-          </Link>
+<Link
+  to="/"
+  className="flex items-center group"
+>
+  <img
+    src={logo}
+    alt="Aurora Logo"
+    className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
+  />
+
+  <div className="leading-tight">
+    <h1 className="text-xl font-semibold tracking-wider text-yellow-500">
+      Aurora Jewels
+    </h1>
+    <p className="text-[10px] text-gray-300 tracking-[0.2em] hidden sm:block">
+      Light Up Your Legacy
+    </p>
+  </div>
+</Link>
 
           <div className="flex items-center space-x-6">
             {user ? (

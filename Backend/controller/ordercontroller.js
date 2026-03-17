@@ -1,5 +1,6 @@
 const Order = require("../models/order");
 const Cart = require("../models/cart");
+const Product = require("../models/product");
 
 exports.createOrder = async (req, res) => {
   try {
@@ -7,18 +8,34 @@ exports.createOrder = async (req, res) => {
     const { address, phoneNumber } = req.body;
 
     if (!address || !phoneNumber) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Please provide address and phone number",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Please provide address and phone number",
+      });
     }
 
     const cartItems = await Cart.find({ userId }).populate("productId");
 
     if (cartItems.length === 0) {
-      return res.status(400).json({ success: false, message: "Cart is empty" });
+      return res.status(400).json({
+        success: false,
+        message: "Cart is empty",
+      });
+    }
+
+    // ✅ Reduce Stock
+    for (const item of cartItems) {
+      const product = await Product.findById(item.productId._id);
+
+      if (product.stock < item.quantity) {
+        return res.status(400).json({
+          success: false,
+          message: `${product.name} is out of stock`,
+        });
+      }
+
+      product.stock -= item.quantity;
+      await product.save();
     }
 
     let total = 0;
@@ -40,15 +57,14 @@ exports.createOrder = async (req, res) => {
     });
 
     await order.save();
+
     await Cart.deleteMany({ userId });
 
-    res
-      .status(201)
-      .json({
-        success: true,
-        message: "Order created successfully",
-        data: order,
-      });
+    res.status(201).json({
+      success: true,
+      message: "Order created successfully",
+      data: order,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

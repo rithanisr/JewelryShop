@@ -3,13 +3,16 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onAdd }) {
   const [loading, setLoading] = useState(false);
   const { token, addToCartCount } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleAddToCart = async (e) => {
-    e.stopPropagation();
+  const handleAddToCart = async (event) => {
+    event.stopPropagation();
+
+    if (product.stock === 0) return;
+
     if (!token) {
       navigate("/login");
       return;
@@ -17,12 +20,15 @@ export default function ProductCard({ product }) {
 
     setLoading(true);
     try {
-      await api.post("/cart/add", {
-        productId: product._id,
-        quantity: 1,
-      });
-      addToCartCount(1);
-      alert("Added to cart!");
+      if (onAdd) {
+        await onAdd(product);
+      } else {
+        await api.post("/cart/add", {
+          productId: product._id,
+          quantity: 1,
+        });
+        addToCartCount(1);
+      }
     } catch (err) {
       alert(err.response?.data?.message || "Failed to add to cart");
     } finally {
@@ -33,6 +39,19 @@ export default function ProductCard({ product }) {
   const handleClick = () => {
     navigate(`/product/${product._id}`);
   };
+
+  const stars = [];
+  const starCount = Math.round(product.rating || 0);
+  for (let i = 1; i <= 5; i++) {
+    stars.push(
+      <span
+        key={i}
+        className={i <= starCount ? "text-yellow-500" : "text-gray-300"}
+      >
+        ★
+      </span>,
+    );
+  }
 
   return (
     <div
@@ -68,23 +87,32 @@ export default function ProductCard({ product }) {
           {product.name}
         </h3>
 
-
         <p className="text-gray-700 text-sm mb-3 line-clamp-2">
           {product.description}
         </p>
 
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-3">
           <span className="text-2xl font-bold text-yellow-600">
             ₹{product.price}
           </span>
-          <div className="flex items-center">
-            <span className="text-yellow-500">⭐</span>
-            <span className="ml-1 text-sm font-medium">
-              {product.rating || 0}
-            </span>
-          </div>
+          <div className="flex items-center gap-1 text-sm">{stars}</div>
         </div>
 
+        <button
+          onClick={handleAddToCart}
+          disabled={product.stock === 0 || loading}
+          className={`w-full py-2 rounded-lg font-semibold text-sm transition ${
+            product.stock === 0
+              ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+              : "bg-yellow-500 text-gray-900 hover:bg-yellow-600"
+          }`}
+        >
+          {loading
+            ? "Adding..."
+            : product.stock === 0
+              ? "Out of Stock"
+              : "Add to Cart"}
+        </button>
       </div>
     </div>
   );
