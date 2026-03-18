@@ -2,6 +2,25 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
+import { Eye, EyeOff, Check, X } from 'lucide-react';
+
+/**
+ * Helper component for password requirement checklist
+ */
+const ValidationItem = ({ label, isValid }) => (
+  <div className={`flex items-center text-xs transition-all duration-300 ${
+    isValid ? "text-green-600 font-medium" : "text-gray-400"
+  }`}>
+    <div className="mr-2">
+      {isValid ? (
+        <Check size={14} strokeWidth={3} className="text-green-600" />
+      ) : (
+        <X size={14} strokeWidth={2} className="text-gray-400" />
+      )}
+    </div>
+    {label}
+  </div>
+);
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -9,13 +28,31 @@ export default function Register() {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // Password Validation Logic
+  const validations = {
+    length: formData.password.length >= 8,
+    hasNumber: /\d/.test(formData.password),
+    hasSpecial: /[!@#$%^&*]/.test(formData.password),
+  };
+
+  const isPasswordValid = Object.values(validations).every(Boolean);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Front-end validation check
+    if (!isPasswordValid) {
+      setError("Please ensure your password meets all requirements.");
+      return;
+    }
+
     setError("");
     setLoading(true);
 
@@ -30,99 +67,103 @@ export default function Register() {
     }
   };
 
-return (
-  <div className="min-h-screen flex items-center justify-center bg-[#F6F3EF] p-6">
-
-    <div className="w-full max-w-md bg-white rounded-[35px] overflow-hidden shadow-xl">
-
-      {/* HEADER */}
-      <div className="relative bg-[#C79A7B] h-64 p-8 text-white">
-
-        <button
-          onClick={() => navigate("/login")}
-          className="text-2xl opacity-80"
-        >
-          ←
-        </button>
-
-        <div className="mt-10">
-          <h2 className="text-3xl font-light">
-            Create <br /> Account
-          </h2>
-          <p className="text-sm opacity-80 mt-2">
-            Join Aurora Jewels
-          </p>
-        </div>
-
-      
-      </div>
-
-      {/* FORM */}
-      <div className="bg-[#F6F3EF] px-8 py-12 rounded-t-[40px] -mt-10">
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-
-          {error && (
-            <div className="bg-red-100 text-red-700 p-3 rounded-md text-sm">
-              {error}
-            </div>
-          )}
-
-          <div>
-            <label className="text-sm text-gray-500">Full Name</label>
-            <input
-              type="text"
-              value={formData.name}
-              onChange={(e)=>
-                setFormData({...formData,name:e.target.value})
-              }
-              className="w-full mt-2 bg-transparent border-b border-[#E7D8CC]
-              focus:outline-none focus:border-[#C79A7B] py-2"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="text-sm text-gray-500">Email</label>
-            <input
-              type="email"
-              value={formData.email}
-              onChange={(e)=>
-                setFormData({...formData,email:e.target.value})
-              }
-              className="w-full mt-2 bg-transparent border-b border-[#E7D8CC]
-              focus:outline-none focus:border-[#C79A7B] py-2"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="text-sm text-gray-500">Password</label>
-            <input
-              type="password"
-              value={formData.password}
-              onChange={(e)=>
-                setFormData({...formData,password:e.target.value})
-              }
-              className="w-full mt-2 bg-transparent border-b border-[#E7D8CC]
-              focus:outline-none focus:border-[#C79A7B] py-2"
-              required
-            />
-          </div>
-
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#F6F3EF] p-6">
+      <div className="w-full max-w-md bg-white rounded-[35px] overflow-hidden shadow-xl">
+        
+        {/* HEADER */}
+        <div className="relative bg-[#C79A7B] h-64 p-8 text-white">
           <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-[#C79A7B] text-white py-4 rounded-full
-            font-semibold shadow-md hover:bg-[#B88A6B]
-            transition duration-300 disabled:opacity-50"
+            onClick={() => navigate("/login")}
+            className="text-2xl opacity-80 hover:opacity-100 transition-opacity"
           >
-            {loading ? "Creating Account..." : "Register"}
+            ←
           </button>
 
-        </form>
+          <div className="mt-10">
+            <h2 className="text-3xl font-light">
+              Create Account
+            </h2>
+            <p className="text-sm opacity-80 mt-2">
+              Join Aurora Jewels
+            </p>
+          </div>
+        </div>
+
+        {/* FORM */}
+        <div className="bg-[#F6F3EF] px-8 py-12 rounded-t-[40px] -mt-10">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            
+            {error && (
+              <div className="bg-red-100 text-red-700 p-3 rounded-md text-sm">
+                {error}
+              </div>
+            )}
+
+            {/* Name Input */}
+            <div>
+              <label className="text-sm text-gray-500">Full Name</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full mt-2 bg-transparent border-b border-[#E7D8CC] focus:outline-none focus:border-[#C79A7B] py-2"
+                required
+              />
+            </div>
+
+            {/* Email Input */}
+            <div>
+              <label className="text-sm text-gray-500">Email</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full mt-2 bg-transparent border-b border-[#E7D8CC] focus:outline-none focus:border-[#C79A7B] py-2"
+                required
+              />
+            </div>
+
+            {/* Password Input */}
+            <div>
+              <label className="text-sm text-gray-500">Password</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  className="w-full mt-2 bg-transparent border-b border-[#E7D8CC] focus:outline-none focus:border-[#C79A7B] py-2 pr-10"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-0 bottom-2 text-gray-400 hover:text-[#C79A7B] transition-colors"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+
+              {/* Validation Checklist */}
+              {formData.password.length > 0 && !isPasswordValid && (
+  <div className="mt-3 grid grid-cols-1 gap-1 animate-in fade-in duration-300">
+    <ValidationItem label="At least 8 characters" isValid={validations.length} />
+    <ValidationItem label="Contains a number" isValid={validations.hasNumber} />
+    <ValidationItem label="Special character (!@#$)" isValid={validations.hasSpecial} />
+  </div>
+)}
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#C79A7B] text-white py-4 rounded-full font-semibold shadow-md hover:bg-[#B88A6B] transition duration-300 disabled:opacity-50"
+            >
+              {loading ? "Creating Account..." : "Register"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function Checkout() {
   const [cartItems, setCartItems] = useState([]);
@@ -106,10 +107,10 @@ export default function Checkout() {
       };
       const { data } = await api.post("/orders/create", orderData);
       updateCartCount(0);
-      alert("Order placed successfully!");
+       toast.success("Order placed successfully!");
       navigate("/orders");
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to place order");
+      toast.error(err.response?.data?.message || "Failed to place order");
     } finally {
       setCheckoutLoading(false);
     }

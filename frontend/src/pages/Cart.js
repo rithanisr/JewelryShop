@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
@@ -46,8 +47,9 @@ export default function Cart() {
         0,
       );
       updateCartCount(totalItems);
+      toast.success("Item removed from cart");
     } catch (err) {
-      alert("Failed to remove item");
+      toast.error("Failed to remove item");
     }
   };
 
@@ -56,8 +58,9 @@ export default function Cart() {
     try {
       await api.put(`/cart/${cartId}`, { quantity });
       fetchCart(); 
+      toast.success("Quantity updated");
     } catch (err) {
-      alert("Failed to update quantity");
+      toast.error("Failed to update quantity");
     }
   };
 

@@ -2,12 +2,14 @@ import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
+import { Eye, EyeOff, Check, X } from 'lucide-react';
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { login } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -47,7 +49,7 @@ return (
         {/* Title */}
         <div className="mt-10">
           <h2 className="text-3xl font-light leading-snug">
-            Welcome <br /> Back
+            Welcome Back
           </h2>
           <p className="text-sm opacity-80 mt-2">
             Sign in to Aurora Jewels
@@ -85,19 +87,28 @@ return (
           </div>
 
           {/* Password */}
-          <div>
-            <label className="text-sm text-gray-500">Password</label>
-            <input
-              type="password"
-              value={formData.password}
-              onChange={(e)=>
-                setFormData({...formData,password:e.target.value})
-              }
-              className="w-full mt-2 bg-transparent border-b border-[#E7D8CC]
-              focus:outline-none focus:border-[#C79A7B] py-2"
-              required
-            />
-          </div>
+         <div>
+  <label className="text-sm text-gray-500">Password</label>
+  <div className="relative mt-2"> {/* Added relative and moved mt-2 here */}
+    <input
+      type={showPassword ? "text" : "password"} // Dynamic type
+      value={formData.password}
+      onChange={(e) =>
+        setFormData({ ...formData, password: e.target.value })
+      }
+      className="w-full bg-transparent border-b border-[#E7D8CC]
+      focus:outline-none focus:border-[#C79A7B] py-2 pr-10" // Added padding-right
+      required
+    />
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="absolute right-0 bottom-2 text-gray-400 hover:text-[#C79A7B] transition-colors"
+    >
+      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+    </button>
+  </div>
+</div>
 
           {/* Button */}
           <button

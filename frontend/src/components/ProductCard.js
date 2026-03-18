@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function ProductCard({ product, onAdd }) {
   const [loading, setLoading] = useState(false);
@@ -28,9 +29,10 @@ export default function ProductCard({ product, onAdd }) {
           quantity: 1,
         });
         addToCartCount(1);
+        toast.success(`${product.name} added to cart!`);
       }
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to add to cart");
+      toast.error(err.response?.data?.message || "Failed to add to cart");
     } finally {
       setLoading(false);
     }

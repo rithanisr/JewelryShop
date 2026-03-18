@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -31,16 +32,18 @@ export default function ProductDetails() {
 
   const handleAddToCart = async () => {
     if (!token) {
+      toast.error("Please login to add items to cart");
       navigate("/login");
       return;
     }
     setAdding(true);
+    const loadingToast = toast.loading("Adding to cart...");
     try {
       await api.post("/cart/add", { productId: product._id, quantity });
       addToCartCount(quantity);
-      alert("Added to cart");
+      toast.success(`${product.name} added to cart!`, { id: loadingToast });
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to add cart");
+      toast.error(err.response?.data?.message || "Failed to add to cart");
     } finally {
       setAdding(false);
     }
