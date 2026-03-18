@@ -46,7 +46,7 @@ export default function ProductCard({ product, onAdd }) {
     stars.push(
       <span
         key={i}
-        className={i <= starCount ? "text-yellow-500" : "text-gray-300"}
+       className={i <= starCount ? "text-[#C79A7B]" : "text-gray-300"}
       >
         ★
       </span>,
@@ -56,7 +56,7 @@ export default function ProductCard({ product, onAdd }) {
   return (
     <div
       onClick={handleClick}
-      className="cursor-pointer bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden"
+      className="cursor-pointer bg-white rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
     >
       <div className="relative h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
         {product.image ? (
@@ -92,7 +92,7 @@ export default function ProductCard({ product, onAdd }) {
         </p>
 
         <div className="flex items-center justify-between mb-3">
-          <span className="text-2xl font-bold text-yellow-600">
+          <span className="text-2xl font-bold text-[#C79A7B]">
             ₹{product.price}
           </span>
           <div className="flex items-center gap-1 text-sm">{stars}</div>
@@ -102,10 +102,10 @@ export default function ProductCard({ product, onAdd }) {
           onClick={handleAddToCart}
           disabled={product.stock === 0 || loading}
           className={`w-full py-2 rounded-lg font-semibold text-sm transition ${
-            product.stock === 0
-              ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-              : "bg-yellow-500 text-gray-900 hover:bg-yellow-600"
-          }`}
+  product.stock === 0
+    ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+    : "bg-[#C79A7B] text-white hover:bg-[#B88A6B] shadow-sm"
+}`}
         >
           {loading
             ? "Adding..."

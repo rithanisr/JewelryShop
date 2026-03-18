@@ -5,11 +5,26 @@ export default function EmptyState({
   message = "Try another category or refresh the page.",
 }) {
   return (
-    <div className="text-center py-16">
-      <p className="text-2xl font-semibold text-gray-800 mb-3">{title}</p>
-      <p className="text-gray-500 mb-6">{message}</p>
-      <div className="inline-flex items-center px-5 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 bg-white">
-        <span> No products to show</span>
+    <div className="flex flex-col items-center justify-center text-center py-20 px-4">
+      
+      {/* Icon Circle */}
+      <div className="w-20 h-20 rounded-full bg-[#F6F3EF] flex items-center justify-center mb-6 shadow-sm">
+        <span className="text-3xl text-[#C79A7B]">✨</span>
+      </div>
+
+      {/* Title */}
+      <h2 className="text-3xl font-bold text-[#6B4F3A] mb-3">
+        {title}
+      </h2>
+
+      {/* Message */}
+      <p className="text-gray-500 max-w-md mb-8">
+        {message}
+      </p>
+
+      {/* Badge */}
+      <div className="inline-flex items-center px-6 py-3 rounded-full text-sm font-semibold text-[#6B4F3A] bg-white border border-[#E5D6CC] shadow-sm">
+        No products to show
       </div>
     </div>
   );

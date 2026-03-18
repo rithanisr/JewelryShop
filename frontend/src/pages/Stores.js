@@ -7,125 +7,115 @@ export default function Stores() {
   const stores = [
     {
       id: 1,
-      name: "JewelShop - Downtown Coimbatore",
-      address: "123 Connaught Place, Coimbatore,Tamil Nadu 110001",
+      name: "Aurora Jewels - Coimbatore",
+      address: "123 Connaught Place, Coimbatore, Tamil Nadu 110001",
       phone: "+91 98765 43210",
-      email: "coimbatore@jewelshop.com",
+      email: "coimbatore@aurorajewels.com",
       hours: "10:00 AM - 8:00 PM",
       days: "Mon - Sun",
     },
     {
       id: 3,
-      name: "JewelShop - Bangalore Forum",
+      name: "Aurora Jewels - Bangalore Forum",
       address: "789 Koramangala, Bangalore, Karnataka 560034",
       phone: "+91 98765 43212",
-      email: "bangalore@jewelshop.com",
+      email: "bangalore@aurorajewels.com",
       hours: "10:00 AM - 8:30 PM",
       days: "Mon - Sun",
     },
     {
       id: 4,
-      name: "JewelShop - Hyderabad Galleria",
+      name: "Aurora Jewels - Hyderabad Galleria",
       address: "321 Jubilee Hills, Hyderabad, Telangana 500033",
       phone: "+91 98765 43213",
-      email: "hyderabad@jewelshop.com",
+      email: "hyderabad@aurorajewels.com",
       hours: "11:00 AM - 8:00 PM",
       days: "Mon - Sun",
-    },
-    {
-      id: 5,
-      name: "JewelShop - Jaipur City",
-      address: "654 MI Road, Jaipur, Rajasthan 302001",
-      phone: "+91 98765 43214",
-      email: "jaipur@jewelshop.com",
-      hours: "10:30 AM - 7:30 PM",
-      days: "Mon - Sun",
-    },
-    {
-      id: 6,
-      name: "JewelShop - Kolkata South",
-      address: "987 Park Street, Kolkata, West Bengal 700016",
-      phone: "+91 98765 43215",
-      email: "kolkata@jewelshop.com",
-      hours: "10:00 AM - 7:00 PM",
-      days: "Mon - Sat",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F6F3EF]">
 
-      <div className="bg-white shadow-md mb-8">
-        <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="bg-white shadow-sm mb-10">
+        <div className="max-w-7xl mx-auto px-4 py-10">
           <button
             onClick={() => navigate(-1)}
-            className="text-blue-600 hover:underline mb-4 font-semibold"
+            className="text-[#6B4F3A] hover:text-[#C79A7B] mb-4 font-semibold transition"
           >
             &larr; Back
           </button>
-          <h1 className="text-4xl font-bold text-gray-900">Our Stores</h1>
-          <p className="text-gray-600 mt-2">Visit us at any of our premium jewelry showrooms</p>
+
+          <h1 className="text-4xl font-bold text-[#6B4F3A]">
+            Our Stores
+          </h1>
+
+          <p className="text-gray-600 mt-2">
+            Visit Aurora Jewels at our premium showroom locations
+          </p>
         </div>
       </div>
 
-      
+      {/* Store Cards */}
       <div className="max-w-7xl mx-auto px-4 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {stores.map((store) => (
-            <div key={store.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
-
-              <div className="bg-yellow-500 text-white p-4">
+            <div
+              key={store.id}
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden"
+            >
+              {/* Card Header */}
+              <div className="bg-[#C79A7B] text-white p-5">
                 <h2 className="text-xl font-bold">{store.name}</h2>
               </div>
 
+              {/* Card Content */}
+              <div className="p-6 space-y-4">
 
-              <div className="p-6">
-
-                <div className="mb-4">
-                  <p className="text-sm text-gray-600 font-semibold mb-1">📍 Address</p>
-                  <p className="text-gray-800">{store.address}</p>
+                <div>
+                  <p className="text-sm text-gray-500 font-semibold">📍 Address</p>
+                  <p className="text-[#6B4F3A]">{store.address}</p>
                 </div>
 
-
-                <div className="mb-4">
-                  <p className="text-sm text-gray-600 font-semibold mb-1">📞 Phone</p>
+                <div>
+                  <p className="text-sm text-gray-500 font-semibold">📞 Phone</p>
                   <a
                     href={`tel:${store.phone}`}
-                    className="text-blue-600 hover:underline"
+                    className="text-[#C79A7B] hover:text-[#B88A6B] font-medium"
                   >
                     {store.phone}
                   </a>
                 </div>
 
-
-                <div className="mb-4">
-                  <p className="text-sm text-gray-600 font-semibold mb-1">📧 Email</p>
+                <div>
+                  <p className="text-sm text-gray-500 font-semibold">📧 Email</p>
                   <a
                     href={`mailto:${store.email}`}
-                    className="text-blue-600 hover:underline"
+                    className="text-[#C79A7B] hover:text-[#B88A6B] font-medium"
                   >
                     {store.email}
                   </a>
                 </div>
 
-
-                <div className="mb-4">
-                  <p className="text-sm text-gray-600 font-semibold mb-1">🕒 Hours</p>
-                  <p className="text-gray-800">{store.hours}</p>
-                  <p className="text-gray-700">{store.days}</p>
+                <div>
+                  <p className="text-sm text-gray-500 font-semibold">🕒 Hours</p>
+                  <p className="text-[#6B4F3A]">{store.hours}</p>
+                  <p className="text-gray-600">{store.days}</p>
                 </div>
 
-
-                <div className="flex gap-3 mt-6">
+                {/* Buttons */}
+                <div className="flex gap-3 pt-4">
                   <a
                     href={`tel:${store.phone}`}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded text-center transition"
+                    className="flex-1 bg-[#C79A7B] hover:bg-[#B88A6B] text-white font-semibold py-2 rounded-xl text-center transition"
                   >
                     Call
                   </a>
+
                   <a
                     href={`mailto:${store.email}`}
-                    className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 rounded text-center transition"
+                    className="flex-1 border border-[#C79A7B] text-[#6B4F3A] hover:bg-[#F6F3EF] font-semibold py-2 rounded-xl text-center transition"
                   >
                     Email
                   </a>
@@ -136,21 +126,28 @@ export default function Stores() {
         </div>
       </div>
 
-
-      <div className="bg-white py-12 border-t">
+      {/* Support Section */}
+      <div className="bg-white py-14 border-t">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Have Questions?</h2>
-          <p className="text-gray-600 mb-6">Contact our customer support team</p>
+          <h2 className="text-2xl font-bold text-[#6B4F3A] mb-4">
+            Have Questions?
+          </h2>
+
+          <p className="text-gray-600 mb-8">
+            Our customer care team is happy to assist you
+          </p>
+
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <a
               href="tel:+919876543210"
-              className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg transition"
+              className="bg-[#C79A7B] hover:bg-[#B88A6B] text-white font-semibold py-3 px-8 rounded-xl transition"
             >
               Call Customer Support
             </a>
+
             <a
-              href="mailto:support@jewelshop.com"
-              className="inline-block bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition"
+              href="mailto:support@aurorajewels.com"
+              className="border border-[#C79A7B] text-[#6B4F3A] hover:bg-[#F6F3EF] font-semibold py-3 px-8 rounded-xl transition"
             >
               Email Us
             </a>

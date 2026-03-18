@@ -69,92 +69,126 @@ export default function Cart() {
   if (loading) return <p className="text-center py-12">Loading cart...</p>;
 
   return (
-    <div className="min-h-screen bg-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+  <div className="min-h-screen bg-[#F6F3EF] py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {cart.length === 0 ? (
-          <p className="text-center text-gray-500">Your cart is empty</p>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              {cart.map((item) => (
-                <div key={item._id} className="flex gap-4 border-b pb-4 mb-4">
-                  <img
-                    src={item.productId?.image}
-                    alt={item.productId?.name}
-                    className="w-24 h-24 object-cover rounded"
-                  />
-                  <div className="flex-1">
-                    <h3 className="font-semibold">{item.productId?.name}</h3>
-                    <p className="text-yellow-600">₹{item.productId?.price}</p>
-                    <div className="flex items-center gap-2 mt-2">
-                      <button
-                        onClick={() =>
-                          handleUpdateQuantity(item._id, item.quantity - 1)
-                        }
-                        className="bg-gray-200 px-2 py-1 rounded"
-                      >
-                        -
-                      </button>
-                      <span>{item.quantity}</span>
-                      <button
-                        onClick={() =>
-                          handleUpdateQuantity(item._id, item.quantity + 1)
-                        }
-                        className="bg-gray-200 px-2 py-1 rounded"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => handleRemove(item._id)}
-                        className="ml-auto text-red-600 hover:text-red-700"
-                      >
-                        Remove
-                      </button>
-                    </div>
+      {/* Heading */}
+      <h1 className="text-3xl font-bold text-[#6B4F3A] mb-10">
+        Your Shopping Bag
+      </h1>
+
+      {cart.length === 0 ? (
+        <p className="text-center text-gray-500">
+          Your cart is empty
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+          {/* Cart Items */}
+          <div className="lg:col-span-2 space-y-6">
+            {cart.map((item) => (
+              <div
+                key={item._id}
+                className="flex gap-5 bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition"
+              >
+                <img
+                  src={item.productId?.image}
+                  alt={item.productId?.name}
+                  className="w-28 h-28 object-cover rounded-lg"
+                />
+
+                <div className="flex-1">
+                  <h3 className="font-semibold text-[#6B4F3A] text-lg">
+                    {item.productId?.name}
+                  </h3>
+
+                  <p className="text-[#C79A7B] font-semibold mt-1">
+                    ₹{item.productId?.price}
+                  </p>
+
+                  {/* Quantity */}
+                  <div className="flex items-center gap-3 mt-4">
+
+                    <button
+                      onClick={() =>
+                        handleUpdateQuantity(item._id, item.quantity - 1)
+                      }
+                      className="bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-md"
+                    >
+                      −
+                    </button>
+
+                    <span className="font-medium">
+                      {item.quantity}
+                    </span>
+
+                    <button
+                      onClick={() =>
+                        handleUpdateQuantity(item._id, item.quantity + 1)
+                      }
+                      className="bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-md"
+                    >
+                      +
+                    </button>
+
+                    <button
+                      onClick={() => handleRemove(item._id)}
+                      className="ml-auto text-red-500 hover:text-red-600 text-sm"
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
 
-            <div className="bg-gray-50 p-6 rounded-lg h-fit sticky top-4">
-              <h2 className="text-xl font-bold mb-4">Order Summary</h2>
-              <p className="text-2xl font-bold text-yellow-600 mb-6">
-                Total: ₹{total}
-              </p>
+          {/* Order Summary */}
+          <div className="bg-white p-7 rounded-xl shadow-md h-fit sticky top-6">
+            <h2 className="text-xl font-bold text-[#6B4F3A] mb-5">
+              Order Summary
+            </h2>
 
-              <div className="space-y-3 mb-6 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                  <span>📦</span>
-                  <span>{cart.length} items in cart</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>🚚</span>
-                  <span>Free shipping on orders above ₹500</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>🔒</span>
-                  <span>Secure checkout</span>
-                </div>
+            <p className="text-2xl font-bold text-[#C79A7B] mb-6">
+              Total: ₹{total}
+            </p>
+
+            <div className="space-y-3 mb-6 text-sm text-gray-600">
+              <div className="flex gap-2">
+                <span>📦</span>
+                <span>{cart.length} items in cart</span>
               </div>
 
-              <button
-                onClick={() => navigate("/checkout")}
-                className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 rounded-lg mb-3"
-              >
-                Proceed to Checkout
-              </button>
-              <button
-                onClick={() => navigate("/")}
-                className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 rounded-lg"
-              >
-                Continue Shopping
-              </button>
+              <div className="flex gap-2">
+                <span>🚚</span>
+                <span>Free shipping above ₹500</span>
+              </div>
+
+              <div className="flex gap-2">
+                <span>🔒</span>
+                <span>Secure checkout</span>
+              </div>
             </div>
+
+            {/* Checkout Button */}
+            <button
+              onClick={() => navigate("/checkout")}
+              className="w-full bg-[#C79A7B] hover:bg-[#B88A6B] text-white font-semibold py-3 rounded-lg transition mb-3"
+            >
+              Proceed to Checkout
+            </button>
+
+            {/* Continue Shopping */}
+            <button
+              onClick={() => navigate("/")}
+              className="w-full border border-[#C79A7B] text-[#6B4F3A] font-semibold py-3 rounded-lg hover:bg-[#F6F3EF] transition"
+            >
+              Continue Shopping
+            </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
 }

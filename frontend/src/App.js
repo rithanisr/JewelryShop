@@ -12,6 +12,8 @@ import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Stores from "./pages/Stores";
 import "./App.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   return (

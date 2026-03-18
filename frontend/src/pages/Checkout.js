@@ -105,7 +105,7 @@ export default function Checkout() {
         phoneNumber: shippingInfo.phone,
       };
       const { data } = await api.post("/orders/create", orderData);
-      updateCartCount(0); 
+      updateCartCount(0);
       alert("Order placed successfully!");
       navigate("/orders");
     } catch (err) {
@@ -132,7 +132,7 @@ export default function Checkout() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <div className="min-h-screen bg-[#F6F3EF] py-12">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
           <p className="text-gray-600 mb-6">
@@ -140,7 +140,7 @@ export default function Checkout() {
           </p>
           <button
             onClick={() => navigate("/")}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg"
+            className="bg-[#C79A7B] hover:bg-[#A87D5F] text-white font-bold py-2 px-6 rounded-lg"
           >
             Continue Shopping
           </button>
@@ -152,9 +152,8 @@ export default function Checkout() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
         <div className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+           <h1 className="text-4xl font-bold text-[#6B4F3A] mb-10">
             Secure Checkout
           </h1>
 
@@ -164,8 +163,8 @@ export default function Checkout() {
                 <div
                   className={`w-12 h-12 rounded-full flex items-center justify-center font-bold ${
                     step >= stepNum
-                      ? "bg-yellow-500 text-white"
-                      : "bg-gray-300 text-gray-600"
+                      ? "bg-[#C79A7B] text-white"
+                      : "bg-[#A87D5F] text-white"
                   }`}
                 >
                   {stepNum}
@@ -173,14 +172,14 @@ export default function Checkout() {
                 {idx < 3 && (
                   <div
                     className={`flex-1 h-1 ${
-                      step > stepNum ? "bg-yellow-500" : "bg-gray-300"
+                      step > stepNum ? "bg-[#C79A7B]" : "bg-gray-200"
                     }`}
                   />
                 )}
               </React.Fragment>
             ))}
           </div>
-          <div className="flex justify-between max-w-3xl mt-2 text-sm text-gray-600">
+          <div className="flex justify-between max-w-3xl mt-2 text-sm text-[#6B4F3A]">
             <span>Shipping</span>
             <span>Billing</span>
             <span>Review</span>
@@ -189,12 +188,10 @@ export default function Checkout() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
           <div className="lg:col-span-2">
-
             {step === 1 && (
               <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-2xl font-bold mb-6">
+                <h2 className="text-2xl font-bold mb-6 text-[#6B4F3A]">
                   Shipping Information
                 </h2>
                 <div className="space-y-4">
@@ -212,7 +209,7 @@ export default function Checkout() {
                             firstName: e.target.value,
                           })
                         }
-                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                           errors.firstName ? "border-red-500" : ""
                         }`}
                       />
@@ -235,7 +232,7 @@ export default function Checkout() {
                             lastName: e.target.value,
                           })
                         }
-                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                           errors.lastName ? "border-red-500" : ""
                         }`}
                       />
@@ -260,7 +257,7 @@ export default function Checkout() {
                           email: e.target.value,
                         })
                       }
-                      className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                      className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                         errors.email ? "border-red-500" : ""
                       }`}
                     />
@@ -284,7 +281,7 @@ export default function Checkout() {
                           phone: e.target.value,
                         })
                       }
-                      className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                      className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                         errors.phone ? "border-red-500" : ""
                       }`}
                     />
@@ -308,7 +305,7 @@ export default function Checkout() {
                           address: e.target.value,
                         })
                       }
-                      className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                      className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                         errors.address ? "border-red-500" : ""
                       }`}
                     />
@@ -333,7 +330,7 @@ export default function Checkout() {
                             city: e.target.value,
                           })
                         }
-                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                           errors.city ? "border-red-500" : ""
                         }`}
                       />
@@ -356,7 +353,7 @@ export default function Checkout() {
                             state: e.target.value,
                           })
                         }
-                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                           errors.state ? "border-red-500" : ""
                         }`}
                       />
@@ -379,7 +376,7 @@ export default function Checkout() {
                             postalCode: e.target.value,
                           })
                         }
-                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                           errors.postalCode ? "border-red-500" : ""
                         }`}
                       />
@@ -401,14 +398,13 @@ export default function Checkout() {
                   </button>
                   <button
                     onClick={() => handleNextStep(2)}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg"
+                    className="bg-[#C79A7B] hover:bg-[#A87D5F] text-white font-bold py-2 px-6 rounded-lg"
                   >
                     Continue to Billing
                   </button>
                 </div>
               </div>
             )}
-
 
             {step === 2 && (
               <div className="bg-white rounded-lg shadow p-6">
@@ -449,7 +445,7 @@ export default function Checkout() {
                               firstName: e.target.value,
                             })
                           }
-                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                             errors.firstName ? "border-red-500" : ""
                           }`}
                         />
@@ -467,7 +463,7 @@ export default function Checkout() {
                               lastName: e.target.value,
                             })
                           }
-                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                             errors.lastName ? "border-red-500" : ""
                           }`}
                         />
@@ -487,7 +483,7 @@ export default function Checkout() {
                             address: e.target.value,
                           })
                         }
-                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                           errors.address ? "border-red-500" : ""
                         }`}
                       />
@@ -507,7 +503,7 @@ export default function Checkout() {
                               city: e.target.value,
                             })
                           }
-                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                             errors.city ? "border-red-500" : ""
                           }`}
                         />
@@ -525,7 +521,7 @@ export default function Checkout() {
                               state: e.target.value,
                             })
                           }
-                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                             errors.state ? "border-red-500" : ""
                           }`}
                         />
@@ -543,7 +539,7 @@ export default function Checkout() {
                               postalCode: e.target.value,
                             })
                           }
-                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#C79A7B] ${
                             errors.postalCode ? "border-red-500" : ""
                           }`}
                         />
@@ -561,14 +557,13 @@ export default function Checkout() {
                   </button>
                   <button
                     onClick={() => handleNextStep(3)}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg"
+                    className="bg-[#C79A7B] hover:bg-[#A87D5F] text-white font-bold py-2 px-6 rounded-lg"
                   >
                     Continue to Review
                   </button>
                 </div>
               </div>
             )}
-
 
             {step === 3 && (
               <div className="bg-white rounded-lg shadow p-6">
@@ -590,67 +585,22 @@ export default function Checkout() {
                   <p className="text-gray-700">{shippingInfo.phone}</p>
                 </div>
 
-                <div className="mb-6 border-t pt-6">
-                  <h3 className="text-lg font-semibold mb-4">
-                    Shipping Method
-                  </h3>
-                  <div className="space-y-2">
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        value="standard"
-                        checked={shippingMethod === "standard"}
-                        onChange={(e) => setShippingMethod(e.target.value)}
-                        className="w-4 h-4"
-                      />
-                      <span className="ml-3">
-                        Standard Shipping (Free - 5-7 days)
-                      </span>
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        value="express"
-                        checked={shippingMethod === "express"}
-                        onChange={(e) => setShippingMethod(e.target.value)}
-                        className="w-4 h-4"
-                      />
-                      <span className="ml-3">
-                        Express Shipping (₹200 - 2-3 days)
-                      </span>
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        value="overnight"
-                        checked={shippingMethod === "overnight"}
-                        onChange={(e) => setShippingMethod(e.target.value)}
-                        className="w-4 h-4"
-                      />
-                      <span className="ml-3">
-                        Overnight Shipping (₹500 - Next day)
-                      </span>
-                    </label>
-                  </div>
-                </div>
-
                 <div className="flex justify-between mt-8">
                   <button
                     onClick={() => setStep(2)}
-                    className="text-gray-600 hover:text-gray-900 font-medium"
+                    className="text-[#6B4F3A] hover:text-[#C79A7B] mb-6 font-semibold transition"
                   >
                     ← Back
                   </button>
                   <button
                     onClick={() => handleNextStep(4)}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg"
+                    className="bg-[#C79A7B] hover:bg-[#A87D5F] text-white font-bold py-2 px-6 rounded-lg"
                   >
                     Continue to Payment
                   </button>
                 </div>
               </div>
             )}
-
 
             {step === 4 && (
               <div className="bg-white rounded-lg shadow p-6">
@@ -712,14 +662,14 @@ export default function Checkout() {
                 <div className="flex justify-between">
                   <button
                     onClick={() => setStep(3)}
-                    className="text-gray-600 hover:text-gray-900 font-medium"
+                    className="text-[#6B4F3A] hover:text-[#C79A7B] mb-6 font-semibold transition"
                   >
                     ← Back
                   </button>
                   <button
                     onClick={handlePlaceOrder}
                     disabled={checkoutLoading}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-8 rounded-lg disabled:opacity-50"
+                    className="bg-[#C79A7B] hover:bg-[#A87D5F] text-white font-bold py-2 px-8 rounded-lg disabled:opacity-50"
                   >
                     {checkoutLoading ? "Processing..." : "Place Order"}
                   </button>
@@ -768,12 +718,11 @@ export default function Checkout() {
                     <span>₹{shippingCost}</span>
                   </div>
                 )}
-                <div className="border-t pt-3 flex justify-between text-xl font-bold text-yellow-600">
+                <div className="border-t pt-3 flex justify-between text-xl font-bold text-[#C79A7B]">
                   <span>Total:</span>
                   <span>₹{total}</span>
                 </div>
               </div>
-
 
               <div className="mt-6 pt-6 border-t space-y-3 text-sm text-gray-600">
                 <div className="flex items-center gap-2">

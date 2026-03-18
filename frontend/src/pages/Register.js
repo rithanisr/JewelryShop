@@ -30,59 +30,99 @@ export default function Register() {
     }
   };
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Create Account
+return (
+  <div className="min-h-screen flex items-center justify-center bg-[#F6F3EF] p-6">
+
+    <div className="w-full max-w-md bg-white rounded-[35px] overflow-hidden shadow-xl">
+
+      {/* HEADER */}
+      <div className="relative bg-[#C79A7B] h-64 p-8 text-white">
+
+        <button
+          onClick={() => navigate("/login")}
+          className="text-2xl opacity-80"
+        >
+          ←
+        </button>
+
+        <div className="mt-10">
+          <h2 className="text-3xl font-light">
+            Create <br /> Account
           </h2>
+          <p className="text-sm opacity-80 mt-2">
+            Join Aurora Jewels
+          </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+
+      
+      </div>
+
+      {/* FORM */}
+      <div className="bg-[#F6F3EF] px-8 py-12 rounded-t-[40px] -mt-10">
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+
           {error && (
-            <div className="bg-red-100 text-red-700 p-3 rounded">{error}</div>
+            <div className="bg-red-100 text-red-700 p-3 rounded-md text-sm">
+              {error}
+            </div>
           )}
 
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
-            required
-          />
+          <div>
+            <label className="text-sm text-gray-500">Full Name</label>
+            <input
+              type="text"
+              value={formData.name}
+              onChange={(e)=>
+                setFormData({...formData,name:e.target.value})
+              }
+              className="w-full mt-2 bg-transparent border-b border-[#E7D8CC]
+              focus:outline-none focus:border-[#C79A7B] py-2"
+              required
+            />
+          </div>
 
-          <input
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
-            required
-          />
+          <div>
+            <label className="text-sm text-gray-500">Email</label>
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(e)=>
+                setFormData({...formData,email:e.target.value})
+              }
+              className="w-full mt-2 bg-transparent border-b border-[#E7D8CC]
+              focus:outline-none focus:border-[#C79A7B] py-2"
+              required
+            />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
-            required
-          />
+          <div>
+            <label className="text-sm text-gray-500">Password</label>
+            <input
+              type="password"
+              value={formData.password}
+              onChange={(e)=>
+                setFormData({...formData,password:e.target.value})
+              }
+              className="w-full mt-2 bg-transparent border-b border-[#E7D8CC]
+              focus:outline-none focus:border-[#C79A7B] py-2"
+              required
+            />
+          </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-yellow-500 text-white py-2 rounded-md hover:bg-yellow-600 disabled:opacity-50"
+            className="w-full bg-[#C79A7B] text-white py-4 rounded-full
+            font-semibold shadow-md hover:bg-[#B88A6B]
+            transition duration-300 disabled:opacity-50"
           >
-            {loading ? "Creating..." : "Register"}
+            {loading ? "Creating Account..." : "Register"}
           </button>
+
         </form>
       </div>
     </div>
-  );
+  </div>
+);
 }
